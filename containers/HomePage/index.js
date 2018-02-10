@@ -15,6 +15,7 @@ export default class HomePage extends React.Component {
     maxCharacter: 0,
     characterType: 'default',
     textInput: '',
+    headerText: '',
     medicines: [
     {
         patient: "Nik",
@@ -56,6 +57,7 @@ export default class HomePage extends React.Component {
     	placeholderText: isPill ? 'Enter Pill ID' : 'Enter Bottle ID',
     	maxCharacter: isPill ? 3 : 6,
     	characterType: isPill ? 'numeric' : 'default',
+    	headerText: isPill ? 'Enter the ID of the pill' : 'Add a new prescription',
     	index
     	
     });
@@ -100,6 +102,7 @@ export default class HomePage extends React.Component {
           >
             <View style={styles.modalContainer}>
               <View style={styles.innerContainer}>
+              	<Text style={{fontSize: 18, fontWeight: '600', alignSelf: 'center', paddingBottom: 20}}>{this.state.headerText}</Text>
                 <TextInput
         			style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 125, borderRadius: 5, alignSelf: 'center'}}
         			placeholder={this.state.placeholderText} 

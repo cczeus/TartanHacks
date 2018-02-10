@@ -16,6 +16,7 @@ export default class HomePage extends React.Component {
     maxCharacter: 0,
     characterType: 'default',
     textInput: '',
+    headerText: '',
     medicines: [
     {
         patient: "Chris",
@@ -94,30 +95,44 @@ export default class HomePage extends React.Component {
     	placeholderText: isPill ? 'Enter Pill ID' : 'Enter Bottle ID',
     	maxCharacter: isPill ? 3 : 6,
     	characterType: isPill ? 'numeric' : 'default',
+      headerText: isPill ? 'Enter the ID of the pill' : 'Add a new prescription',
     	index
     	
     });
   }
 
-  closeModal(index) {
-  	if(index >= 0) {
+  closeModal() {
+ 
   	var newState = this.state.medicines;
-  	var med = this.state.medicines[index];
-  	med.takeNext = '24 hours',
-  	med.events.push({pill: this.state.text, date: Date.now()})
-  	newState[index] = med;
+
+    newState.push({
+      patient: this.state.patient_text,
+      doctor: "Dr, Seuss",
+      medicine: this.state.prescription_text,
+      instructions: this.state.instructions_text,
+      numFails: 0,
+      bottleId: this.state.medicines.length,
+      events: [],
+      pills: this.generatePills(this.state.numPills_text),
+
+
+    });
+
  	
     this.setState({
     	modalVisible:false,
     	text: '',
     	medicines: newState,
     });
-} else {
-	this.setState({
-    	modalVisible:false,
-    	text: '',
-    });
+
 }
+  
+  generatePills(numPills) {
+    var arr = [];
+    for(var i = 0; i < numPills; i++) {
+      arr.push(i);
+    }
+    return arr;
   }
   render() {
   	const { navigate } = this.props.navigation;
@@ -128,8 +143,9 @@ export default class HomePage extends React.Component {
    }
     return (
       <ThemeProvider uiTheme={UITheme}>
-
+       
       	<View style={{ flexDirection: 'column', flex: 1 }}>
+         <ScrollView>
       	<Modal
               visible={this.state.modalVisible}
               animationType={'slide'}
@@ -138,13 +154,33 @@ export default class HomePage extends React.Component {
           >
             <View style={styles.modalContainer}>
               <View style={styles.innerContainer}>
-                <TextInput
-        			style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 125, borderRadius: 5, alignSelf: 'center'}}
-        			placeholder={this.state.placeholderText} 
-        			onChangeText={(text) => this.setState({text})}
+              <Text style={{fontSize: 18, fontWeight: '600', alignSelf: 'center', paddingBottom: 20}}>Add a new prescription</Text>
+      
+              
+              <TextInput
+        			style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 125, borderRadius: 5, alignSelf: 'center', marginBottom: 15 }}
+        			placeholder="Patient Name" 
+        			onChangeText={(patient_text) => this.setState({patient_text})}
         			keyboardType={this.state.characterType}
-        			maxLength={this.state.maxCharacter}
-        			value={this.state.text}/>
+        			maxLength={40} />
+               <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 125, borderRadius: 5, alignSelf: 'center', marginBottom: 15 }}
+              placeholder="Presciption name"
+              onChangeText={(prescription_text) => this.setState({prescription_text})}
+              keyboardType={this.state.characterType}
+              maxLength={40}/>
+              <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 125, borderRadius: 5, alignSelf: 'center', marginBottom: 15 }}
+              placeholder="Instructions" 
+              onChangeText={(instructions_text) => this.setState({instructions_text})}
+              keyboardType={this.state.characterType}
+              maxLength={300} />
+               <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 125, borderRadius: 5, alignSelf: 'center', marginBottom: 15 }}
+              placeholder="Number of pills" 
+              onChangeText={(numPills_text) => this.setState({numPills_text})}
+              keyboardType="numeric"
+              maxLength={3}/>
                 <Button
                     onPress={() => this.closeModal(this.state.index)}
                     title="Done"
@@ -164,17 +200,20 @@ export default class HomePage extends React.Component {
       		
 
         	
-        	<TouchableOpacity
-            	onPress={ () => this.openModal(false, -1) }
-            	style={{position: 'absolute', bottom: 25, right: 25 }}>
-            		<View style={actionButtonStyle}>
-            			<FoundationIcon name="plus" style={{ alignSelf: 'center', top: 20 }} size={18} color="white" />
-            		</View>
-            	</TouchableOpacity>
-           
-        </View>
- 
+        	</ScrollView>
+           <TouchableOpacity
+              onPress={ () => this.openModal(false, -1) }
+              style={{position: 'absolute', bottom: 25, right: 25 }}>
+                <View style={actionButtonStyle}>
+                  <FoundationIcon name="plus" style={{ alignSelf: 'center', top: 20 }} size={18} color="white" />
+                </View>
+              </TouchableOpacity>
+                </View>
       </ThemeProvider>
+           
+      
+  
+ 
     );
   }
 }
