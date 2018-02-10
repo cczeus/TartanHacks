@@ -1,39 +1,50 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
 import AppBar from './components/AppBar';
-import Pittition from './components/Pittition';
-import Trending from './components/Trending';
+import Medicine from './components/Medicine';
 import { height, width } from './utils/getDimensions';
+import { UITheme } from './utils/MuiTheme';
+import { ActionButton, Card, ThemeProvider } from 'react-native-material-ui';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <AppBar />
-        <ScrollView style={scrollViewStyle}>
-          <Trending />
-          <Pittition liked={true} />
-          <Pittition />
-          <Pittition liked={true} />
-          <Pittition />
-          <Pittition />
-        </ScrollView>
+      <ThemeProvider uiTheme={UITheme}>
+      <View style={wrapperStyle}>
+      <AppBar />
+        <View>
+          <Medicine />
+          <Medicine />
+          <Medicine />
+        </View>
+           <ActionButton style={styles}/>
       </View>
+
+      </ThemeProvider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    
-    backgroundColor: '#F7F8FC',
-
-
-  },
-});
-
 const scrollViewStyle = {
-  // marginTop: height/7.5,
+
   width: '100%',
 
 }
+
+const wrapperStyle= {
+  flex: 1,
+  backgroundColor: '#EEEEEE',
+  
+}
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: UITheme.palette.secondaryColor,
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    zIndex: 100,
+     
+
+  }
+
+})

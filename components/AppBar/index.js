@@ -11,21 +11,13 @@ import FoundationIcon from 'react-native-vector-icons/Foundation';
 export default class AppBar extends React.Component {
   render() {
     return (
-    	<View style={style}>
-      {/*<View style={{ flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-          <FontAwesome name="fire" size={30} color='white' />
-        </View>
-        <View style={{ flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-          <FontAwesome name="fire" size={30} color='white' />
-        </View> */}
-        <View style={{ flex: 1 }}>
+      <View style={style}>
+
+        <View style={{ flex: 0.2 }}>
           <FoundationIcon name="align-left" size={30} color='white' style={{ marginLeft: 15 }} />
         </View>
-        <View style={{ flex: 1, alignItems: 'center' }}>
-          <FoundationIcon name="home" size={30} color='white' />
-        </View>
-        <View style={{ flex: 1, alignItems: 'flex-end' }}>
-          <EntypoIcon name="plus" size={30} color='white' style={{ marginRight: 15 }} />
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
+          <Text style={{ color: 'white', fontWeight: 'bold',  fontSize: 22 }}>Your Medicine</Text>
         </View>
       </View>
        
@@ -36,7 +28,7 @@ export default class AppBar extends React.Component {
 
 
 const style = {
-  flex: 0.10,
+  flex: 0.25,
   flexDirection: 'row',
   alignItems: 'center',
   height: (Platform.OS === 'ios') ? 100 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
