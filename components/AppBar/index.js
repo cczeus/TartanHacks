@@ -33,7 +33,7 @@ const style = {
   alignItems: 'center',
   height: (Platform.OS === 'ios') ? 100 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
   backgroundColor: '#2196F3',
-  height: height/7.5,
+  height: 200,
   paddingTop: (Platform.OS === 'ios') ? 30 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
 
   shadowColor: '#000000',

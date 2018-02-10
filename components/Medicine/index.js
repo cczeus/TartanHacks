@@ -21,8 +21,6 @@ export default class Medicine extends React.Component {
       liked: props.liked,
       status: props.status,
       message: props.message,
-
-
     };
   }
   render() {
@@ -31,14 +29,15 @@ export default class Medicine extends React.Component {
     return (
       <View style={style}>
 
-          <View style={{ padding: 5, flexDirection: 'column', backgroundColor: 'red'}}>
+          <View style={{ padding: 5, flexDirection: 'column' }}>
             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Medicine Name</Text>
           </View>
-          
-          <View style={{ flex: 1, alignSelf: 'flex-end', alignItems: 'center', backgroundColor: 'green'}}>
+
+          <View style={{ flex: 1, alignSelf: 'flex-end', alignItems: 'center' }}>
             <View style={{ flexDirection: 'column', flex: 1 }}>
               <Text style={{ fontSize: 32, fontWeight: 'bold', color: UITheme.palette.secondaryColor }}>26</Text>
             </View>
+
             <View style={{ flexDirection: 'column', flex: 1, alignSelf: 'center'}}>
               <Text style={{ fontSize: 16, color: 'gray'}}>left</Text>
             </View>
