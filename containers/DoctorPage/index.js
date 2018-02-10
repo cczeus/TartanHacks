@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Platform, Button, Alert, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, Modal, TextInput } from 'react-native';
 import AppBar from '../../components/AppBar';
-import Medicine from '../../components/Medicine';
+
+import Patient from '../../components/patient';
 import { height, width } from '../../utils/getDimensions';
 import { UITheme } from '../../utils/MuiTheme';
 import { ActionButton, Card, ThemeProvider } from 'react-native-material-ui';
@@ -17,6 +18,19 @@ export default class HomePage extends React.Component {
     textInput: '',
     medicines: [
     {
+        patient: "Chris",
+        doctor: "Dr. Seuss",
+        medicine: "Ibuprofen",
+        instructions: "Take twice every day",
+        bottleId: "Ax67Ni",
+        pills: [1, 10, 50, 100, 200],
+        numFails: 1,
+        events: [
+            {pill: 1, time: 1518286674970},
+            {pill: 50, time: 1518286694970}
+        ]
+    },
+    {
         patient: "Nik",
         doctor: "Dr. Seuss",
         medicine: "Adderall",
@@ -27,10 +41,34 @@ export default class HomePage extends React.Component {
         events: [
             {pill: 1, time: 1518286674970},
             {pill: 50, time: 1518286694970}
-        ],
-        takeNext: '2 hours 32 minutes'
+        ]
     },
-    
+    {
+        patient: "Evan",
+        doctor: "Dr. Seuss",
+        medicine: "Vicodin",
+        instructions: "Take once every morning",
+        bottleId: "123456",
+        pills: [1, 10, 50, 100, 200],
+        numFails: 32,
+        events: [
+            {pill: 1, time: 1518286674970},
+            {pill: 50, time: 1518286694970}
+        ]
+    },
+    {
+        patient: "Aaron",
+        doctor: "Dr. Seuss",
+        medicine: "Oxycontin",
+        instructions: "Take once every evening",
+        bottleId: "a1B2c3",
+        pills: [1, 10, 50, 100, 200],
+        numFails: 3,
+        events: [
+            {pill: 1, time: 1518286674970},
+            {pill: 50, time: 1518286694970}
+        ]
+    },
     {
         patient: "Nik",
         doctor: "Dr. Seuss",
@@ -42,10 +80,10 @@ export default class HomePage extends React.Component {
         events: [
             {pill: 1, time: 1518286674970},
             {pill: 50, time: 1518286694970}
-        ],
-        takeNext: '32 minutes'
+        ]
     }
-    ]
+    
+]
   };
 
   openModal(isPill, index) {
@@ -115,23 +153,15 @@ export default class HomePage extends React.Component {
               </View>
             </View>
         </Modal>
-      		<View>
-          		<TouchableOpacity
-            		onPress={ () => this.openModal(true, 0) }>
-            		<View>
-            			<Medicine takeNext={this.state.medicines[0].takeNext} instructions={this.state.medicines[0].instructions} name={this.state.medicines[0].medicine} numLeft={this.state.medicines[0].pills.length - this.state.medicines[0].events.length} />
-            		</View>
-           		</TouchableOpacity>
-        	</View>
+        {this.state.medicines.map(m => {
+          return (
+              <View key={m.bottleId}>
+                  <Patient patient={m.patient} medicine={m.medicine} numFails={m.numFails} numLeft={m.pills.length - m.events.length} />
+             </View>
         
-        	<View>
-            	<TouchableOpacity
-            		onPress={ () => this.openModal(true, 1) }>
-            		<View>
-            			<Medicine takeNext={this.state.medicines[1].takeNext} instructions={this.state.medicines[1].instructions} name={this.state.medicines[1].medicine} numLeft={this.state.medicines[1].pills.length - this.state.medicines[1].events.length}/>
-            		</View>
-            	</TouchableOpacity>
-        	</View>
+            )
+        })}
+      		
 
         	
         	<TouchableOpacity

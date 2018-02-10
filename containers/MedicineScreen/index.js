@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Platform } from 'react-native';
 import AppBar from '../../components/AppBar';
+import { StyleSheet, Text, View, ScrollView, Platform, TextInput } from 'react-native';
 import Medicine from '../../components/Medicine';
 import { height, width } from '../../utils/getDimensions';
 import { UITheme } from '../../utils/MuiTheme';
 import { ActionButton, Card, ThemeProvider } from 'react-native-material-ui';
 
-export default class HomePage extends React.Component {
+export default class MedicineScreen extends React.Component {
   render() {
     return (
       <ThemeProvider uiTheme={UITheme}>
-        <Text>In next page</Text>
+       <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
 
+      />
       </ThemeProvider>
     );
   }

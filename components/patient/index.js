@@ -10,7 +10,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 
-export default class Medicine extends React.Component {
+export default class Patient extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,13 +31,13 @@ export default class Medicine extends React.Component {
 
           <View style={{ padding: 25, flexDirection: 'column' }}>
             <View style={{  flexDirection: 'row' }}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.props.name}</Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.props.patient}</Text>
             </View>
              <View style={{  flexDirection: 'row',marginTop: 10 }}>
-              <Text style={{ fontSize: 14,  }}>{this.props.instructions}</Text>
+              <Text style={{ fontSize: 14,  }}>{this.props.medicine}</Text>
             </View>
             <View style={{  flexDirection: 'row',  }}>
-              <Text style={{ fontSize: 14,  }}>Take next in: {this.props.takeNext}</Text>
+              <Text style={{ fontSize: 14,  }}>Failed attempts: {this.props.numFails}</Text>
             </View>
           </View>
 
